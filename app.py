@@ -20,7 +20,7 @@ def save_comments(comments):
 # Load comments at the start
 comments = load_comments()
 
-# Title and styling with improved readability
+# Title and styling with a wedding-themed background and font styles
 st.markdown(
     """
     <style>
@@ -28,44 +28,44 @@ st.markdown(
         background-image: url('https://www.example.com/wedding_rings_background.jpg'); /* Replace with actual image URL */
         background-size: cover;
         background-position: center;
-        color: #ffffff;
+        color: #333333;  /* Changed font color to improve readability */
         font-family: 'Georgia', serif;
     }
     .wedding-header {
         font-family: "Brush Script MT", cursive;
         font-size: 48px;
         text-align: center;
-        color: #FFF5F5;
+        color: #FFF;
         margin-top: 20px;
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     }
     .sub-header {
         text-align: center;
         font-family: "Georgia", serif;
-        font-size: 26px;
-        color: #FFF5F5;
+        font-size: 24px;
+        color: #FFF;  /* Updated text color for better contrast */
         margin-top: 10px;
-        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     }
     .dedication {
         text-align: center;
         font-family: "Georgia", serif;
         font-size: 20px;
-        color: #ffffff;
+        color: #FFF;  /* Updated text color */
         margin-top: 20px;
         font-style: italic;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
     .message {
         font-family: "Georgia", serif;
         font-size: 24px;
         text-align: center;
         color: #5A189A;
-        background: rgba(244, 225, 247, 0.8);
+        background: rgba(244, 225, 247, 0.9);
         border-radius: 10px;
         padding: 20px;
         margin-top: 20px;
-        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
         border: 3px solid #5A189A;
     }
     .comment-section {
@@ -73,9 +73,9 @@ st.markdown(
         margin-top: 20px;
         padding: 15px;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.8);
         color: #5A189A;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .footer {
         text-align: center;
@@ -84,7 +84,7 @@ st.markdown(
         margin-top: 30px;
     }
     .input-section {
-        background-color: rgba(244, 225, 247, 0.9);
+        background-color: rgba(244, 225, 247, 0.8);
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
