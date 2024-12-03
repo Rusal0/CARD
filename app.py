@@ -67,6 +67,7 @@ st.markdown(
         border: 1px solid #E5E5E5;
         border-radius: 5px;
         background: #FAFAFA;
+        color: #0000FF; /* Blue color for the comment text */
     }
     .footer {
         text-align: center;
@@ -149,8 +150,6 @@ else:
 # Footer
 st.write("---")
 st.markdown(
-    """
-
-    """,
+    """ """,
     unsafe_allow_html=True,
 )
