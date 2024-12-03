@@ -20,53 +20,95 @@ def save_comments(comments):
 # Load comments at the start
 comments = load_comments()
 
-# Title and styling
+# Title and styling with a wedding-themed background and font styles
 st.markdown(
     """
     <style>
+    body {
+        background-image: url('https://www.example.com/wedding_rings_background.jpg'); /* Replace with actual image URL */
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        font-family: 'Georgia', serif;
+    }
     .wedding-header {
         font-family: "Brush Script MT", cursive;
         font-size: 48px;
         text-align: center;
-        color: #5A189A;
-        margin-bottom: -10px;
+        color: #F8BBD0;
+        margin-top: 20px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     }
     .sub-header {
         text-align: center;
         font-family: "Georgia", serif;
-        color: #5A189A;
+        font-size: 24px;
+        color: #F8BBD0;
+        margin-top: 10px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     }
     .dedication {
         text-align: center;
         font-family: "Georgia", serif;
         font-size: 20px;
-        color: #1D3557;
+        color: #ffffff;
         margin-top: 20px;
+        font-style: italic;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
     .message {
         font-family: "Georgia", serif;
         font-size: 24px;
         text-align: center;
         color: #5A189A;
-        background: #F4E1F7;
+        background: rgba(244, 225, 247, 0.9);
         border-radius: 10px;
         padding: 20px;
         margin-top: 20px;
-        box-shadow: 2px 2px 10px #E2C6EE;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+        border: 3px solid #5A189A;
     }
     .comment-section {
         font-family: "Arial", sans-serif;
         margin-top: 20px;
-        padding: 10px;
-        border: 1px solid #E5E5E5;
-        border-radius: 5px;
-        background: #FAFAFA;
+        padding: 15px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #5A189A;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .footer {
         text-align: center;
         font-family: "Georgia", serif;
         color: #5A189A;
         margin-top: 30px;
+    }
+    .input-section {
+        background-color: rgba(244, 225, 247, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .input-field {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .submit-btn {
+        background-color: #5A189A;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .submit-btn:hover {
+        background-color: #9B4D96;
     }
     </style>
     """,
@@ -112,10 +154,15 @@ st.markdown(
 # User input for name and comment
 st.write("---")
 st.subheader("Leave a Wedding Wish!")
-name = st.text_input("Your Name", placeholder="Enter your name here")
-wish = st.text_area("Your Wedding Wish", placeholder="Enter your wedding wish here")
+st.markdown("<div class='input-section'>", unsafe_allow_html=True)
+name = st.text_input("Your Name", placeholder="Enter your name here", key="name", label_visibility="collapsed", help="Enter your name here", max_chars=50)
+wish = st.text_area("Your Wedding Wish", placeholder="Enter your wedding wish here", key="wish", label_visibility="collapsed", height=150, max_chars=500)
 
-if st.button("Submit Wish"):
+submit_button = st.button("Submit Wish", key="submit-btn", help="Click to submit your wedding wish")
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+if submit_button:
     if name.strip() and wish.strip():
         new_comment = {"name": name.strip(), "wish": wish.strip()}
         comments.append(new_comment)
@@ -128,8 +175,7 @@ if st.button("Submit Wish"):
 st.write("---")
 st.subheader("Wedding Wishes for Ankita")
 if comments:
-    for i in range(len(comments)):  # Use indices instead of modifying the list directly
-        comment = comments[i]
+    for comment in comments:
         st.markdown(
             f"""
             <div class="comment-section">
@@ -138,11 +184,6 @@ if comments:
             """,
             unsafe_allow_html=True,
         )
-        # Add a delete button for each comment
-        if st.button(f"Delete {comment['name']}'s Wish", key=f"delete_{i}"):
-            del comments[i]
-            save_comments(comments)
-            st.experimental_rerun()
 else:
     st.info("No wishes have been added yet. Be the first to leave a wish!")
 
