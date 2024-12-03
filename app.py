@@ -150,10 +150,7 @@ else:
 st.write("---")
 st.markdown(
     """
-    <div class="footer">
-        <p>Ankita Shukla</p>
-        <p>Team Life Sciences COA</p>
-    </div>
+
     """,
     unsafe_allow_html=True,
 )
