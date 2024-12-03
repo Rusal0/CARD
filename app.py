@@ -128,7 +128,8 @@ if st.button("Submit Wish"):
 st.write("---")
 st.subheader("Wedding Wishes for Ankita")
 if comments:
-    for i, comment in enumerate(comments):
+    for i in range(len(comments)):  # Use indices instead of modifying the list directly
+        comment = comments[i]
         st.markdown(
             f"""
             <div class="comment-section">
@@ -137,8 +138,8 @@ if comments:
             """,
             unsafe_allow_html=True,
         )
-        # Add a delete button for each comment (Owner Only)
-        if st.checkbox(f"Delete {comment['name']}'s Wish", key=f"delete_{i}"):
+        # Add a delete button for each comment
+        if st.button(f"Delete {comment['name']}'s Wish", key=f"delete_{i}"):
             del comments[i]
             save_comments(comments)
             st.experimental_rerun()
