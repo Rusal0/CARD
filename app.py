@@ -1,8 +1,24 @@
 import streamlit as st
+import json
+from pathlib import Path
 
-# Initialize session state for storing comments
-if "comments" not in st.session_state:
-    st.session_state.comments = []
+# Path to the file that stores the comments
+COMMENTS_FILE = "comments.json"
+
+# Function to load comments from the file
+def load_comments():
+    if Path(COMMENTS_FILE).exists():
+        with open(COMMENTS_FILE, "r") as file:
+            return json.load(file)
+    return []
+
+# Function to save comments to the file
+def save_comments(comments):
+    with open(COMMENTS_FILE, "w") as file:
+        json.dump(comments, file)
+
+# Load comments at the start
+comments = load_comments()
 
 # Title and styling
 st.markdown(
@@ -101,7 +117,9 @@ wish = st.text_area("Your Wedding Wish", placeholder="Enter your wedding wish he
 
 if st.button("Submit Wish"):
     if name.strip() and wish.strip():
-        st.session_state.comments.append({"name": name.strip(), "wish": wish.strip()})
+        new_comment = {"name": name.strip(), "wish": wish.strip()}
+        comments.append(new_comment)
+        save_comments(comments)
         st.success("Your wish has been added!")
     else:
         st.error("Please fill in both fields before submitting.")
@@ -109,8 +127,8 @@ if st.button("Submit Wish"):
 # Display all comments
 st.write("---")
 st.subheader("Wedding Wishes for Ankita")
-if st.session_state.comments:
-    for i, comment in enumerate(st.session_state.comments):
+if comments:
+    for i, comment in enumerate(comments):
         st.markdown(
             f"""
             <div class="comment-section">
@@ -119,9 +137,10 @@ if st.session_state.comments:
             """,
             unsafe_allow_html=True,
         )
-        # Add a delete button for each comment
-        if st.button(f"Delete Wish {i+1}", key=f"delete_{i}"):
-            del st.session_state.comments[i]
+        # Add a delete button for each comment (Owner Only)
+        if st.checkbox(f"Delete {comment['name']}'s Wish", key=f"delete_{i}"):
+            del comments[i]
+            save_comments(comments)
             st.experimental_rerun()
 else:
     st.info("No wishes have been added yet. Be the first to leave a wish!")
