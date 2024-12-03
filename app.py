@@ -25,7 +25,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url('https://www.example.com/wedding_rings_background.jpg'); /* Replace with actual image URL */
+        background-image: url('https://pngtree.com/freebackground/gold-wedding-rings-with-a-wedding-decor_15465396.html'); /* Replace with actual image URL */
         background-size: cover;
         background-position: center;
         color: white;
@@ -80,7 +80,7 @@ st.markdown(
 )
 
 # Display wedding message
-st.markdown('<h1 class="wedding-header">Wedding Day</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="wedding-header">Congratulations on your wedding!!</h1>', unsafe_allow_html=True)
 st.markdown(
     """
     <div class="sub-header">
